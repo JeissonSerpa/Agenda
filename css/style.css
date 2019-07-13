@@ -1,0 +1,285 @@
+/** Custom Properties **/
+
+:root{
+    --primario: #c2185b;
+    --primarioBarra: rgb(156,10,69);
+    --secundario: #ffc107;
+}
+
+html{
+    box-sizing: border-box;
+}
+
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+
+body{
+    background: var(--primario);
+}
+
+h1, h2{
+    text-align: center;
+    margin: 0;
+}
+
+h1{
+    padding: 1rem;
+    background: var(--primarioBarra);
+    color: white;
+}
+
+h2{
+    color: var(--primario);
+    font-size: 2rem;
+}
+
+.bgamarillo{
+    background: var(--secundario);
+}
+
+.contenedor{
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px){
+    .contenedor{
+        max-width: 85%;
+    }
+}
+
+.sombra{
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
+    -o-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
+    border-radius: 1rem;
+}
+
+form{
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+@media only screen and (min-width: 768px){
+    form{
+        padding: 3rem;
+        margin-top: 4rem;
+    }
+}
+
+form legend{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    color: var(--primario);
+}
+
+legend span{
+    font-size: 1rem;
+    font-weight: normal;
+    clear: both;
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    color: #e1e1e1;
+}
+
+.contenedorBarra{
+    background: var(--primarioBarra);
+}
+
+@media only screen and (min-width: 768px){
+    .campos{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+    .campo{
+        flex: 0 0 calc(33.3% - 1rem);
+    }
+}
+
+.campo{
+    padding: 5px 0;
+}
+
+.campo label{
+    font-size: 1.2rem;
+}
+
+.campo input[type="text"],
+.campo input[type="tel"]{
+    width: 100%;
+    border: none;
+    padding: .6rem;
+    margin-top: .5rem;
+}
+
+.enviar{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.enviar input[type="submit"]{
+    background: var(--primario);
+    border: none;
+    padding: .7rem 3.2rem;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 4px;
+    flex: 1;
+    transition: all .6s ease;
+}
+
+.enviar input[type="submit"]:hover{
+    background: var(--primarioBarra);
+    cursor: pointer;
+    transition: all .6s ease;
+}
+
+@media only screen and (min-width: 768px){
+    .enviar input[type="submit"]{
+        flex: 0 0 auto;
+    }
+}
+
+.contactos{
+    margin-top: 2rem;
+    background: white;
+}
+
+.contenedorContactos{
+    margin: 2rem auto 1rem auto;
+    padding: 1rem;
+}
+
+@media only screen and (min-width: 768px){
+    .contenedorContactos{
+        width: 80%;
+        margin: 2rem auto 1rem auto;
+        padding: 3rem;
+    }
+}
+
+.fila{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e1e1e1;;
+    height: 2.3rem;
+}
+
+.fila:first-child{
+    border-top: 1px solid #e1e1e1;
+}
+
+.encabezado{
+    text-align: center;
+    justify-content: center;
+    background: var(--primario);
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.columna:first-child{
+    flex: 0 0 calc(35%);
+}
+
+.columna{
+    flex: 0 0 calc(21.66%);
+    border-right: 1px solid #e1e1e1;
+    display: flex;
+    align-items: center;
+    padding: 0 .5rem;
+    font-size: 1.2rem;
+}
+
+.columna:first-child{
+    border-left: 1px solid #e1e1e1;
+}
+
+.iconos{
+    justify-content: center;
+}
+
+.btn{
+    font-size: 1.8rem;
+    background: transparent;
+    border: none;
+    padding: 0 .6rem;
+}
+
+.btnEditar{
+    color: var(--secundario);
+    text-decoration: none;
+}
+
+.btnBorrar{
+    color: var(--primario);
+}
+
+.buscador{
+    width: 100%;
+    height: 2.8rem;
+    margin: 2rem 0 .5rem 0;
+    border: none;
+    border: 1px solid #e1e1e1;
+    text-align: center;
+}
+
+.totalContactos{
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primario);
+}
+
+.totalContactos span{
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+div .barra{
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+}
+
+.volver{
+    background: var(--secundario);
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: .5rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+}
+
+.notificacion{
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 1rem 3rem;
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.visible{
+    opacity: 1;
+    transition: all 1s ease;
+}
+
+.exito{
+    background: rgb(179, 241, 117);
+    color: green;
+}
+
+.error{
+    background: rgb(238, 148, 166);
+    color: rgb(163, 0, 33);
+}
