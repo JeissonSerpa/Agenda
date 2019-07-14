@@ -222,6 +222,7 @@ legend span{
 .btnBorrar{
     color: var(--primario);
     font-size: 1.7rem;
+    cursor: pointer;
 }
 
 .buscador{

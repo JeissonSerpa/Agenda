@@ -1,9 +1,14 @@
 const formularioContactos = document.querySelector("#contacto");
+const contenedorTabla = document.querySelector('#listadoContacto');
 
 eventoEscucha();
 
 function eventoEscucha(){
     formularioContactos.addEventListener('submit', leerFormulario);
+
+    //Evento para eliminar contacto
+
+    contenedorTabla.addEventListener('click', eliminarContacto);
 }
 
 function leerFormulario(e){
@@ -47,7 +52,6 @@ function insertaDB(datos){
             const respuesta = JSON.parse(xhr.responseText);
 
             //Emulando tabla de resultados
-            const contenedorTabla = document.querySelector('#listadoContacto');
             const nuevoContacto = document.createElement('div');
             nuevoContacto.classList.add('fila');
             nuevoContacto.innerHTML = `
@@ -101,6 +105,46 @@ function insertaDB(datos){
     //Enviar los datos
     xhr.send(datos);
 
+}
+
+//funcion para eliminar contacto
+
+function eliminarContacto(e){
+    const eventoEliminar = e.target.parentElement.classList.contains('btnBorrar');
+    if(eventoEliminar){
+        const id = e.target.parentElement.getAttribute('data-id');
+        console.log(id);
+
+        //pregunar si esta seguro de eliminar
+
+        const alerta = confirm('Estas segur@ de eliminar el contacto? ');
+        if(alerta){
+
+            //se crea el objeto
+            const xhr = new XMLHttpRequest();
+            //se abre la conexion
+            xhr.open('GET', `includes/modelos/modelosContacto.php?id=${id}&accion=borrar`, true);
+            //Leer la respuesta
+            xhr.onload = function(){
+                if(this.status === 200){
+                    const resultado = JSON.parse(xhr.responseText);
+                    console.log(resultado);
+                    if(resultado.resultado == 'eliminado'){
+                        const fila = e.target.parentElement.parentElement.parentElement;
+                        fila.remove();
+
+                        mostrarNotificacion('Registro Eliminado', 'exito');
+                    }else{
+                        mostrarNotificacion('Hubo un error...', 'error');
+                    }
+                }
+            }
+            //Enviar los datos
+            xhr.send();
+        }else{
+            console.log('No estoy seguro');
+        }
+    }    
 }
 
 function mostrarNotificacion(mensaje, clase){

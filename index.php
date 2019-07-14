@@ -1,4 +1,7 @@
-<?php include "includes/layout/header.php" ?>
+<?php
+    include "includes/funciones/funciones.php";
+    include "includes/layout/header.php";
+?>
 
 <div class="contenedorBarra">
     <h1>Agenda de Contactos</h1>
@@ -35,7 +38,8 @@
     <div class="contenedorContactos">
         <h2>Contactos</h2>
         <input type="text" id="buscar" class="buscador sombra" placeholder="Buscar Contacto...">
-        <p class="totalContactos"><span>2</span> Contactos</p>
+        <p class="totalContactos">
+            <span>2</span> Contactos</p>
 
         <div class="contenedorTabla">
             <div id="listadoContacto">
@@ -45,39 +49,27 @@
                     <div class="columna encabezado">Telefono</div>
                     <div class="columna encabezado">Acciones</div>
                 </div>
+                <?php
+                    $contactos = retornarContactos();
+
+                    if($contactos->num_rows){
+                        foreach ($contactos as $contactos) {
+                ?>
                 <div class="fila">
-                    <div class="columna">Jeisson Serpa</div>
-                    <div class="columna">SerPan</div>
-                    <div class="columna">3138912135</div>
+                    <div class="columna"><?php echo $contactos['nombre']; ?></div>
+                    <div class="columna"><?php echo $contactos['empresa']; ?></div>
+                    <div class="columna"><?php echo $contactos['telefono']; ?></div>
                     <div class="columna iconos">
-                        <a href="editar.php?id=1" class="btn btnEditar"><i class="fas fa-pen-square"></i></a>
-                        <button type="button" data-id="1" class="btn btnBorrar">
+                        <a href="editar.php?id=<?php echo $contactos['id']; ?>" class="btn btnEditar"><i class="fas fa-pen-square"></i></a>
+                        <button type="button" data-id="<?php echo $contactos['id']; ?>" class="btn btnBorrar">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </div>
                 </div>
-                <div class="fila">
-                    <div class="columna">Emmanuel Romero</div>
-                    <div class="columna">SerPan</div>
-                    <div class="columna">3138912135</div>
-                    <div class="columna iconos">
-                        <a href="editar.php?id=1" class="btn btnEditar"><i class="fas fa-pen-square"></i></a>
-                        <button type="button" data-id="1" class="btn btnBorrar">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="fila">
-                    <div class="columna">Pepito Perez</div>
-                    <div class="columna">SerPan</div>
-                    <div class="columna">3138912135</div>
-                    <div class="columna iconos">
-                        <a href="editar.php?id=1" class="btn btnEditar"><i class="fas fa-pen-square"></i></a>
-                        <button type="button" data-id="1" class="btn btnBorrar">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </div>
-                </div>
+                <?php
+                        }
+                    }
+                ?>
             </div>
         </div>
     </div>
