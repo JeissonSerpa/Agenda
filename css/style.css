@@ -221,6 +221,7 @@ legend span{
 
 .btnBorrar{
     color: var(--primario);
+    font-size: 1.7rem;
 }
 
 .buscador{
@@ -266,12 +267,12 @@ div .barra{
     right: 1rem;
     padding: 1rem 3rem;
     opacity: 0;
-    transition: all 1s ease;
+    transition: all .8s ease;
 }
 
 .visible{
     opacity: 1;
-    transition: all 1s ease;
+    transition: all .8s ease;
 }
 
 .exito{

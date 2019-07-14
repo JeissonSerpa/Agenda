@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="campo enviar">
-            <input type="hiden" id="accion" value="crear">
+            <input type="hidden" id="accion" value="crear">
             <input type="submit" value="Añadir">
         </div>
     </form>

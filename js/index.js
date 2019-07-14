@@ -43,6 +43,59 @@ function insertaDB(datos){
     xhr.onload = function(){
         if(this.status === 200){
             console.log(JSON.parse(xhr.responseText));
+
+            const respuesta = JSON.parse(xhr.responseText);
+
+            //Emulando tabla de resultados
+            const contenedorTabla = document.querySelector('#listadoContacto');
+            const nuevoContacto = document.createElement('div');
+            nuevoContacto.classList.add('fila');
+            nuevoContacto.innerHTML = `
+                <div class="columna">${respuesta.datos.nombre}</div>
+                <div class="columna">${respuesta.datos.empresa}</div>
+                <div class="columna">${respuesta.datos.telefono}</div>
+            `;
+            contenedorTabla.appendChild(nuevoContacto);
+
+            //Crear contenedor para los botones
+            const contenedorIconos = document.createElement('div');
+            contenedorIconos.classList.add('columna', 'iconos');
+            
+            //crear icono para editar
+
+            const iconoEditar = document.createElement('i');
+            iconoEditar.classList.add('fas', 'fa-pen-square');
+            
+            //Crear enlace para editar
+
+            const btnEditar = document.createElement('a');
+            btnEditar.appendChild(iconoEditar);
+            btnEditar.href = `editar.php?id=${respuesta.datos.idInsertado}`;
+            btnEditar.classList.add('btn', 'btnEditar');
+            contenedorIconos.appendChild(btnEditar);
+
+            //Crear icono borrar
+
+            const iconoBorrar = document.createElement('i');
+            iconoBorrar.classList.add('fas', 'fa-trash-alt');
+
+            //crear boton para borrar
+
+            const btnBorrar = document.createElement('button');
+            btnBorrar.appendChild(iconoBorrar);
+            btnBorrar.href = `editar.php?id=${respuesta.datos.idInsertado}`;
+            btnBorrar.classList.add('btn', 'btnBorrar');
+            btnBorrar.setAttribute('data-id', respuesta.datos.idInsertado);
+            btnBorrar.setAttribute('type', 'button');
+            contenedorIconos.appendChild(btnBorrar);
+            nuevoContacto.appendChild(contenedorIconos);
+
+            //Resetear Formulario
+
+            document.querySelector('form').reset();
+
+            //Mostrar Notificacion
+            mostrarNotificacion('Contacto Creado Correctamente', 'exito');
         }
     }
     //Enviar los datos

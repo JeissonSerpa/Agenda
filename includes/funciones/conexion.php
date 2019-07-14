@@ -9,6 +9,4 @@ $db = 'agendaPHP';
 
 $conn = new mysqli($host, $usuario, $pass, $db);
 
-echo $conn->ping();
-
 ?>
