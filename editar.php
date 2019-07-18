@@ -1,4 +1,8 @@
-<?php include "includes/layout/header.php" ?>
+<?php include "includes/layout/header.php";
+echo '<pre>';
+var_dump($_GET);
+echo '</pre>';
+?>
 
 <div class="contenedorBarra">
     <div class="contenedor barra">
