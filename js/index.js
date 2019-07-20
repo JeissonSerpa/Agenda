@@ -7,8 +7,9 @@ function eventoEscucha(){
     formularioContactos.addEventListener('submit', leerFormulario);
 
     //Evento para eliminar contacto
-
-    contenedorTabla.addEventListener('click', eliminarContacto);
+    if(contenedorTabla){
+        contenedorTabla.addEventListener('click', eliminarContacto);
+    }
 }
 
 function leerFormulario(e){
