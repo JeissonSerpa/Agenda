@@ -38,8 +38,7 @@
     <div class="contenedorContactos">
         <h2>Contactos</h2>
         <input type="text" id="buscar" class="buscador sombra" placeholder="Buscar Contacto...">
-        <p class="totalContactos">
-            <span>2</span> Contactos</p>
+        <p class="totalContactos"><span></span> Contactos</p>
 
         <div class="contenedorTabla">
             <div id="listadoContacto">
@@ -55,7 +54,7 @@
                     if($contactos->num_rows){
                         foreach ($contactos as $contactos) {
                 ?>
-                <div class="fila">
+                <div class="fila registro">
                     <div class="columna"><?php echo $contactos['nombre']; ?></div>
                     <div class="columna"><?php echo $contactos['empresa']; ?></div>
                     <div class="columna"><?php echo $contactos['telefono']; ?></div>
