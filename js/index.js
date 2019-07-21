@@ -30,17 +30,19 @@ function leerFormulario(e){
         infoContacto.append('telefono', Telefono);
         infoContacto.append('accion', Accion);
         if(Accion === 'crear'){
+            console.log(...infoContacto);
             //Crear nuevo contacto en Base de Datos
             insertaDB(infoContacto);
         }else{
-
+            //Editar contacto
+            const idEditar = document.querySelector('#id').value;
+            infoContacto.append('id', idEditar);
+            actualizarRegistro(infoContacto);
         }
     }
 }
 
 function insertaDB(datos){
-    //llamado a AJAX
-    
     //Crear el objeto
     const xhr = new XMLHttpRequest();
     //Abrir la conexion
@@ -48,10 +50,7 @@ function insertaDB(datos){
     //Pasar los datos
     xhr.onload = function(){
         if(this.status === 200){
-            console.log(JSON.parse(xhr.responseText));
-
             const respuesta = JSON.parse(xhr.responseText);
-
             //Emulando tabla de resultados
             const nuevoContacto = document.createElement('div');
             nuevoContacto.classList.add('fila');
@@ -65,14 +64,12 @@ function insertaDB(datos){
             //Crear contenedor para los botones
             const contenedorIconos = document.createElement('div');
             contenedorIconos.classList.add('columna', 'iconos');
-            
-            //crear icono para editar
 
+            //crear icono para editar
             const iconoEditar = document.createElement('i');
             iconoEditar.classList.add('fas', 'fa-pen-square');
-            
-            //Crear enlace para editar
 
+            //Crear enlace para editar
             const btnEditar = document.createElement('a');
             btnEditar.appendChild(iconoEditar);
             btnEditar.href = `editar.php?id=${respuesta.datos.idInsertado}`;
@@ -80,12 +77,10 @@ function insertaDB(datos){
             contenedorIconos.appendChild(btnEditar);
 
             //Crear icono borrar
-
             const iconoBorrar = document.createElement('i');
             iconoBorrar.classList.add('fas', 'fa-trash-alt');
 
             //crear boton para borrar
-
             const btnBorrar = document.createElement('button');
             btnBorrar.appendChild(iconoBorrar);
             btnBorrar.href = `editar.php?id=${respuesta.datos.idInsertado}`;
@@ -96,7 +91,6 @@ function insertaDB(datos){
             nuevoContacto.appendChild(contenedorIconos);
 
             //Resetear Formulario
-
             document.querySelector('form').reset();
 
             //Mostrar Notificacion
@@ -105,7 +99,30 @@ function insertaDB(datos){
     }
     //Enviar los datos
     xhr.send(datos);
+}
 
+function actualizarRegistro(datos){
+    //Crear el objeto
+    const xhr = new XMLHttpRequest();
+    //Abrir la conexion
+    xhr.open('POST', 'includes/modelos/modelosContacto.php', true);
+    //Pasar los datos
+    xhr.onload = function(){
+        if(this.status === 200){
+            const respuesta = JSON.parse(xhr.responseText);
+            if(respuesta.resultado === 'editado'){
+                mostrarNotificacion('Contacto Editado Correctamente', 'exito');
+            }else{
+                mostrarNotificacion('No se Realizaron Cambios', 'error');
+            }
+            setTimeout(() => {
+                window.location.href = 'index.php';
+            }, 3500);
+        }
+    }
+    //console.log(...infoContacto);
+    //Enviar la peticion
+    xhr.send(datos);
 }
 
 //funcion para eliminar contacto
@@ -117,23 +134,21 @@ function eliminarContacto(e){
         console.log(id);
 
         //pregunar si esta seguro de eliminar
-
         const alerta = confirm('Estas segur@ de eliminar el contacto? ');
         if(alerta){
-
             //se crea el objeto
             const xhr = new XMLHttpRequest();
+
             //se abre la conexion
             xhr.open('GET', `includes/modelos/modelosContacto.php?id=${id}&accion=borrar`, true);
+
             //Leer la respuesta
             xhr.onload = function(){
                 if(this.status === 200){
                     const resultado = JSON.parse(xhr.responseText);
-                    console.log(resultado);
                     if(resultado.resultado == 'eliminado'){
                         const fila = e.target.parentElement.parentElement.parentElement;
                         fila.remove();
-
                         mostrarNotificacion('Registro Eliminado', 'exito');
                     }else{
                         mostrarNotificacion('Hubo un error...', 'error');

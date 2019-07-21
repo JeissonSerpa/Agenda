@@ -62,3 +62,35 @@
             echo json_encode($mensaje);
         }
     }
+
+    if(isset($_POST['accion'])){
+        if($_POST['accion'] == 'editar'){
+           require_once('../funciones/conexion.php');
+           
+           $nombre = $_POST['nombre'];
+           $empresa = $_POST['empresa'];
+           $telefono = $_POST['telefono'];
+           $id = $_POST['id'];
+           
+           try {
+            $stmt = $conn->prepare("UPDATE contactos set nombre = ?, empresa = ?, telefono = ? WHERE id = ?");
+            $stmt->bind_param("sssi", $nombre, $empresa, $telefono, $id);
+            $stmt->execute(); 
+            if($stmt->affected_rows == 1){
+                $mensaje = array(
+                    'resultado' => 'editado'
+                );
+            $stmt->close();
+            $conn->close(); 
+            }else{
+                $mensaje = ['resultado' => 'Sin Cambios'];
+            }
+        } catch (Exception $e) {
+            $mensaje = array(
+                'mensaje' => $e->getMesage()
+            );
+        }
+        echo json_encode($mensaje);
+        }
+    }
+?>
